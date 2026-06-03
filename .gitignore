@@ -1,0 +1,20 @@
+# ════════════════════════════════
+#  NIEMALS in Git hochladen!
+# ════════════════════════════════
+
+# Echte Umgebungsvariablen (lokale Entwicklung)
+.env
+.env.local
+.env.production
+
+# Node / Vercel
+node_modules/
+.vercel/
+
+# OS-Dateien
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
