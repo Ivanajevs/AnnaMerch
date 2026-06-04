@@ -4,13 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin – St. Anna Merch</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
-
-
-
   <style>
     :root {
       --bg:        #fce7e7;
@@ -23,240 +19,170 @@
       --radius:    10px;
       --green:     #22c55e;
       --red:       #ef4444;
+      --orange:    #f97316;
+      --blue:      #3b82f6;
+      --purple:    #a855f7;
       --border:    rgba(232,160,32,.18);
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
-
+    /* ── Header ── */
     header {
-      background: var(--bg2);
-      border-bottom: 1px solid var(--border);
-      padding: 1rem 2rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+      background: var(--bg2); border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem; display: flex; align-items: center; gap: 1rem;
     }
-    .logo-main {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.6rem;
-      color: var(--gold);
-      letter-spacing: .04em;
-    }
-    .logo-sub {
-      font-size: .75rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: .12em;
-    }
+    .logo-main { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--gold); letter-spacing: .04em; }
+    .logo-sub   { font-size: .75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .12em; }
     .admin-badge {
-      margin-left: auto;
-      font-size: .7rem;
-      background: var(--gold);
-      color: #000;
-      font-weight: 600;
-      padding: .25rem .7rem;
-      border-radius: 99px;
-      text-transform: uppercase;
-      letter-spacing: .08em;
+      margin-left: auto; font-size: .7rem; background: var(--gold); color: #000;
+      font-weight: 600; padding: .25rem .7rem; border-radius: 99px;
+      text-transform: uppercase; letter-spacing: .08em;
     }
     #logoutBtn {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      font-family: 'DM Sans', sans-serif;
-      font-size: .8rem;
-      padding: .4rem .9rem;
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: all .2s;
+      background: transparent; border: 1px solid var(--border); color: var(--text-muted);
+      font-family: 'DM Sans', sans-serif; font-size: .8rem; padding: .4rem .9rem;
+      border-radius: var(--radius); cursor: pointer; transition: all .2s;
     }
     #logoutBtn:hover { border-color: var(--gold); color: var(--gold); }
 
-    /*  Login Screen*/
+    /* ── Login ── */
     #loginScreen {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: calc(100vh - 70px);
-      padding: 2rem;
+      display: flex; align-items: center; justify-content: center;
+      min-height: calc(100vh - 70px); padding: 2rem;
     }
     .login-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2.5rem 2rem;
-      width: 100%;
-      max-width: 380px;
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
+      background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 2.5rem 2rem; width: 100%; max-width: 380px;
+      display: flex; flex-direction: column; gap: 1.2rem;
     }
-    .login-card h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.8rem;
-      color: var(--gold);
-      letter-spacing: .04em;
-    }
+    .login-card h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--gold); letter-spacing: .04em; }
     .login-card label {
-      font-size: .78rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: .1em;
-      display: block;
-      margin-bottom: .4rem;
+      font-size: .78rem; color: var(--text-muted); text-transform: uppercase;
+      letter-spacing: .1em; display: block; margin-bottom: .4rem;
     }
     .login-card input {
-      width: 100%;
-      padding: .7rem 1rem;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: .95rem;
-      outline: none;
-      transition: border-color .2s;
+      width: 100%; padding: .7rem 1rem; background: var(--bg3); border: 1px solid var(--border);
+      border-radius: var(--radius); color: var(--text); font-family: 'DM Sans', sans-serif;
+      font-size: .95rem; outline: none; transition: border-color .2s;
     }
     .login-card input:focus { border-color: var(--gold); }
-    .login-error {
-      font-size: .83rem;
-      color: var(--red);
-      min-height: 1.2rem;
-    }
+    .login-error { font-size: .83rem; color: var(--red); min-height: 1.2rem; }
     .btn-login {
-      width: 100%;
-      padding: .8rem;
-      background: var(--gold);
-      border: none;
-      border-radius: var(--radius);
-      color: #000;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.1rem;
-      letter-spacing: .06em;
-      cursor: pointer;
-      transition: background .2s;
+      width: 100%; padding: .8rem; background: var(--gold); border: none;
+      border-radius: var(--radius); color: #000; font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem; letter-spacing: .06em; cursor: pointer; transition: background .2s;
     }
     .btn-login:hover { background: var(--gold-dim); }
 
-    /*  Dashboard  */
-    #dashboard {
-      display: none;
-      padding: 2rem;
-    }
-    .dash-header {
-      display: flex;
-      align-items: baseline;
-      gap: 1rem;
-      margin-bottom: 1.8rem;
-      flex-wrap: wrap;
-    }
-    .dash-header h1 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.2rem;
-      color: var(--gold);
-      letter-spacing: .04em;
-    }
-    .order-count { font-size: .8rem; color: var(--text-muted); }
-    .btn-refresh {
-      margin-left: auto;
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      font-family: 'DM Sans', sans-serif;
-      font-size: .8rem;
-      padding: .4rem .9rem;
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: all .2s;
-    }
-    .btn-refresh:hover { border-color: var(--gold); color: var(--gold); }
+    /* ── Dashboard ── */
+    #dashboard { display: none; padding: 2rem; }
 
-    .table-wrap {
-      overflow-x: auto;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
+    /* ── Tabs ── */
+    .tabs { display: flex; gap: .5rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--border); padding-bottom: .5rem; }
+    .tab-btn {
+      background: none; border: none; font-family: 'DM Sans', sans-serif;
+      font-size: .85rem; font-weight: 600; color: var(--text-muted);
+      padding: .4rem 1rem; border-radius: var(--radius) var(--radius) 0 0;
+      cursor: pointer; transition: all .2s; letter-spacing: .04em;
     }
+    .tab-btn.active { background: var(--bg2); color: var(--gold); border-bottom: 2px solid var(--gold); }
+    .tab-btn:hover:not(.active) { color: var(--text); }
+
+    /* ── Dash Header ── */
+    .dash-header {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;
+    }
+    .dash-header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--gold); letter-spacing: .04em; }
+    .order-count { font-size: .8rem; color: var(--text-muted); }
+    .dash-actions { margin-left: auto; display: flex; gap: .5rem; flex-wrap: wrap; }
+    .btn-sm {
+      background: transparent; border: 1px solid var(--border); color: var(--text-muted);
+      font-family: 'DM Sans', sans-serif; font-size: .8rem; padding: .4rem .9rem;
+      border-radius: var(--radius); cursor: pointer; transition: all .2s;
+    }
+    .btn-sm:hover { border-color: var(--gold); color: var(--gold); }
+    .btn-sm.danger:hover { border-color: var(--red); color: var(--red); }
+    .btn-sm.success:hover { border-color: var(--green); color: var(--green); }
+    .btn-sm:disabled { opacity: .4; cursor: not-allowed; }
+
+    /* ── Bulk-Bar (erscheint wenn Zeilen selektiert sind) ── */
+    .bulk-bar {
+      display: none; align-items: center; gap: 1rem;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: .7rem 1.2rem;
+      margin-bottom: 1rem; font-size: .85rem;
+    }
+    .bulk-bar.visible { display: flex; }
+    .bulk-bar strong { color: var(--gold); }
+    .bulk-bar-actions { margin-left: auto; display: flex; gap: .5rem; }
+
+    /* ── Tabelle ── */
+    .table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
     table { width: 100%; border-collapse: collapse; font-size: .88rem; }
     thead th {
-      background: var(--bg3);
-      color: var(--text-muted);
-      font-size: .7rem;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-      font-weight: 600;
-      padding: .85rem 1.1rem;
-      text-align: left;
-      white-space: nowrap;
+      background: var(--bg3); color: var(--text-muted); font-size: .7rem;
+      text-transform: uppercase; letter-spacing: .12em; font-weight: 600;
+      padding: .85rem 1.1rem; text-align: left; white-space: nowrap;
       border-bottom: 1px solid var(--border);
     }
+    thead th.th-check { width: 40px; padding: .85rem .6rem; }
     tbody tr { border-bottom: 1px solid rgba(232,160,32,.07); transition: background .15s; }
     tbody tr:last-child { border-bottom: none; }
     tbody tr:hover { background: rgba(232,160,32,.04); }
-    tbody td { padding: .85rem 1.1rem; vertical-align: middle; white-space: nowrap; }
+    tbody tr.selected { background: rgba(253,0,0,.05); }
+    tbody td { padding: .7rem 1.1rem; vertical-align: middle; white-space: nowrap; }
+    tbody td.td-check { padding: .7rem .6rem; }
+
+    .row-checkbox { width: 16px; height: 16px; cursor: pointer; accent-color: var(--gold); }
+
     .order-id-btn {
-      background: none;
-      border: none;
-      color: var(--gold);
-      font-family: 'DM Sans', sans-serif;
-      font-size: .88rem;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      padding: 0;
+      background: none; border: none; color: var(--gold); font-family: 'DM Sans', sans-serif;
+      font-size: .88rem; font-weight: 600; cursor: pointer;
+      text-decoration: underline; text-underline-offset: 3px; padding: 0;
     }
     .order-id-btn:hover { color: var(--gold-dim); }
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: .4rem;
-      padding: .3rem .8rem;
-      border-radius: 99px;
-      font-size: .75rem;
-      font-weight: 600;
-      font-family: 'DM Sans', sans-serif;
-      cursor: pointer;
-      border: none;
-      transition: all .2s;
-    }
-    .status-badge.on  { background: rgba(34,197,94,.18); color: var(--green); }
-    .status-badge.off { background: rgba(239,68,68,.12); color: var(--red); }
-    .status-badge:hover { filter: brightness(1.1); transform: scale(1.05); }
-    .status-dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: currentColor;
-      flex-shrink: 0;
-    }
-    .table-state { text-align: center; padding: 3rem 1rem; color: var(--text-muted); }
-    .date-cell { font-size: .8rem; color: var(--text-muted); }
 
-    /* Detail Modal */
+    /* ── Status-Badges ── */
+    .status-badge {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .3rem .8rem; border-radius: 99px; font-size: .75rem;
+      font-weight: 600; font-family: 'DM Sans', sans-serif;
+      cursor: pointer; border: none; transition: all .2s;
+    }
+    .status-badge.on  { background: rgba(34,197,94,.18);  color: var(--green); }
+    .status-badge.off { background: rgba(239,68,68,.12);  color: var(--red); }
+    .status-badge.loading { opacity: .5; cursor: wait; pointer-events: none; }
+    .status-badge:hover { filter: brightness(1.1); transform: scale(1.05); }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+    .table-state { text-align: center; padding: 3rem 1rem; color: var(--text-muted); }
+    .date-cell   { font-size: .8rem; color: var(--text-muted); }
+
+    /* ── Archiv-Zeilen leicht ausgegraut ── */
+    tr.archived-row { opacity: .7; }
+
+    /* ── Toast-Nachricht ── */
+    #toast {
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(20px);
+      background: #1a1a1a; color: #fff; padding: .65rem 1.4rem; border-radius: 99px;
+      font-size: .85rem; font-weight: 600; opacity: 0;
+      transition: opacity .3s, transform .3s; pointer-events: none; z-index: 9999;
+      white-space: nowrap;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ── Detail Modal ── */
     .modal-overlay {
-      position: fixed; inset: 0;
-      background: rgba(88,14,24,.7);
-      backdrop-filter: blur(4px);
-      z-index: 999;
+      position: fixed; inset: 0; background: rgba(88,14,24,.7);
+      backdrop-filter: blur(4px); z-index: 999;
       display: flex; align-items: center; justify-content: center;
-      padding: 1.5rem;
-      opacity: 0; pointer-events: none;
-      transition: opacity .3s;
+      padding: 1.5rem; opacity: 0; pointer-events: none; transition: opacity .3s;
     }
     .modal-overlay.active { opacity: 1; pointer-events: all; }
     .detail-modal {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      max-width: 520px; width: 100%;
-      max-height: 90vh; overflow-y: auto;
-      padding: 2rem;
+      background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius);
+      max-width: 520px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 2rem;
       position: relative;
       transform: translateY(20px) scale(.97);
       transition: transform .3s cubic-bezier(.34,1.3,.64,1);
@@ -264,326 +190,540 @@
     .modal-overlay.active .detail-modal { transform: translateY(0) scale(1); }
     .detail-close {
       position: absolute; top: 1rem; right: 1.2rem;
-      background: none; border: none; font-size: 1.3rem;
-      cursor: pointer; color: var(--text-muted);
+      background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-muted);
     }
     .detail-close:hover { color: var(--gold); }
     .detail-modal h3 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.6rem; color: var(--gold);
-      letter-spacing: .04em; margin-bottom: 1.2rem;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem;
+      color: var(--gold); letter-spacing: .04em; margin-bottom: 1.2rem;
     }
-    .detail-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: .7rem 1.2rem;
-    }
+    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem 1.2rem; }
     .detail-item { display: flex; flex-direction: column; gap: .15rem; }
     .detail-item.full { grid-column: 1 / -1; }
-    .detail-label {
-      font-size: .68rem; text-transform: uppercase;
-      letter-spacing: .12em; color: var(--text-muted); font-weight: 600;
-    }
+    .detail-label { font-size: .68rem; text-transform: uppercase; letter-spacing: .12em; color: var(--text-muted); font-weight: 600; }
     .detail-value { font-size: .9rem; color: var(--text); word-break: break-all; }
     .detail-divider { grid-column: 1/-1; border: none; border-top: 1px solid var(--border); margin: .3rem 0; }
+
+    /* ── Bestätigungs-Modal ── */
+    .confirm-modal {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius);
+      max-width: 380px; width: 100%; padding: 2rem; position: relative;
+      transform: translateY(20px) scale(.97); transition: transform .3s cubic-bezier(.34,1.3,.64,1);
+      text-align: center;
+    }
+    .modal-overlay.active .confirm-modal { transform: translateY(0) scale(1); }
+    .confirm-modal h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--gold); margin-bottom: .8rem; }
+    .confirm-modal p  { font-size: .9rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.5; }
+    .confirm-btns { display: flex; gap: .8rem; justify-content: center; }
+    .btn-confirm-yes {
+      padding: .6rem 1.4rem; background: var(--gold); color: #000; border: none;
+      border-radius: var(--radius); font-family: 'Bebas Neue', sans-serif; font-size: 1rem;
+      letter-spacing: .06em; cursor: pointer; transition: background .2s;
+    }
+    .btn-confirm-yes:hover { background: var(--gold-dim); }
+    .btn-confirm-no {
+      padding: .6rem 1.4rem; background: transparent; color: var(--text-muted);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif; font-size: .9rem; cursor: pointer;
+    }
+    .btn-confirm-no:hover { border-color: var(--text-muted); }
   </style>
 </head>
 <body>
 
-  <header>
+<header>
+  <div>
+    <div class="logo-main">St. Anna</div>
+    <div class="logo-sub">Admin-Panel</div>
+  </div>
+  <span class="admin-badge">Admin</span>
+  <button id="logoutBtn" hidden>Abmelden</button>
+</header>
+
+<!-- ── Login ─────────────────────────────────────────────────────────── -->
+<div id="loginScreen">
+  <div class="login-card">
+    <h2>Anmelden</h2>
     <div>
-      <div class="logo-main">St. Anna</div>
-      <div class="logo-sub">Admin-Panel</div>
+      <label for="loginUser">Benutzername</label>
+      <input type="text" id="loginUser" autocomplete="username" placeholder="admin" />
     </div>
-    <span class="admin-badge">Admin</span>
-    <button id="logoutBtn" hidden>Abmelden</button>
-  </header>
+    <div>
+      <label for="loginPass">Passwort</label>
+      <input type="password" id="loginPass" autocomplete="current-password" placeholder="••••••••" />
+    </div>
+    <p class="login-error" id="loginError"></p>
+    <button class="btn-login" id="loginBtn">Anmelden</button>
+  </div>
+</div>
 
-  <!--Login  -->
-  <div id="loginScreen">
-    <div class="login-card">
-      <h2>Anmelden</h2>
-      <div>
-        <label for="loginUser">Benutzername</label>
-        <input type="text" id="loginUser" autocomplete="username" placeholder="admin" />
-      </div>
-      <div>
-        <label for="loginPass">Passwort</label>
-        <input type="password" id="loginPass" autocomplete="current-password" placeholder="••••••••" />
-      </div>
-      <p class="login-error" id="loginError"></p>
-      <button class="btn-login" id="loginBtn">Anmelden</button>
+<!-- ── Dashboard ──────────────────────────────────────────────────────── -->
+<div id="dashboard">
+
+  <!-- Tabs: Aktiv / Archiv -->
+  <div class="tabs">
+    <button class="tab-btn active" id="tabActive">📦 Aktive Bestellungen</button>
+    <button class="tab-btn" id="tabArchive">🗄️ Archiv</button>
+  </div>
+
+  <div class="dash-header">
+    <h1 id="dashTitle">Bestellungen</h1>
+    <span class="order-count" id="orderCount"></span>
+    <div class="dash-actions">
+      <button class="btn-sm success" id="archiveDoneBtn" title="Alle erledigten archivieren">✓ Erledigte archivieren</button>
+      <button class="btn-sm danger"  id="archiveEmptyBtn" title="Alle ohne Status archivieren">✗ Leere archivieren</button>
+      <button class="btn-sm" id="refreshBtn">↻ Aktualisieren</button>
     </div>
   </div>
 
-  <!--  Dashboard  -->
-  <div id="dashboard">
-    <div class="dash-header">
-      <h1>Bestellungen</h1>
-      <span class="order-count" id="orderCount"></span>
-      <button class="btn-refresh" id="refreshBtn">↻ Aktualisieren</button>
-    </div>
-    <div class="table-wrap">
-      <table id="ordersTable">
-        <thead>
-          <tr>
-            <th>Bestell-ID</th>
-            <th>Produkt</th>
-            <th>Kunde</th>
-            <th>Bezahlt</th>
-            <th>Bestellt</th>
-            <th>Ausgeliefert</th>
-            <th>Datum</th>
-          </tr>
-        </thead>
-        <tbody id="ordersBody">
-          <tr><td colspan="7" class="table-state">Lade Bestellungen…</td></tr>
-        </tbody>
-      </table>
+  <!-- Bulk-Aktionsleiste -->
+  <div class="bulk-bar" id="bulkBar">
+    <span><strong id="bulkCount">0</strong> ausgewählt</span>
+    <div class="bulk-bar-actions">
+      <button class="btn-sm" id="bulkArchiveBtn">Archivieren</button>
+      <button class="btn-sm success" id="bulkRestoreBtn" style="display:none">Wiederherstellen</button>
+      <button class="btn-sm" id="bulkSelectNone">Auswahl aufheben</button>
     </div>
   </div>
 
-  <!--Detail Modal -->
-  <div class="modal-overlay" id="detailOverlay">
-    <div class="detail-modal" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
-      <button class="detail-close" id="detailClose" aria-label="Schließen">✕</button>
-      <h3 id="detailTitle">Bestellung</h3>
-      <div class="detail-grid" id="detailGrid"></div>
+  <div class="table-wrap">
+    <table id="ordersTable">
+      <thead>
+        <tr>
+          <th class="th-check"><input type="checkbox" id="selectAll" class="row-checkbox" /></th>
+          <th>Bestell-ID</th>
+          <th>Produkt</th>
+          <th>Kunde</th>
+          <th>Bezahlt</th>
+          <th>Bestellt</th>
+          <th>Abholbereit</th>
+          <th>Ausgeliefert</th>
+          <th>Datum</th>
+          <th>Aktion</th>
+        </tr>
+      </thead>
+      <tbody id="ordersBody">
+        <tr><td colspan="10" class="table-state">Lade Bestellungen…</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ── Detail Modal ───────────────────────────────────────────────────── -->
+<div class="modal-overlay" id="detailOverlay">
+  <div class="detail-modal" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+    <button class="detail-close" id="detailClose">✕</button>
+    <h3 id="detailTitle">Bestellung</h3>
+    <div class="detail-grid" id="detailGrid"></div>
+  </div>
+</div>
+
+<!-- ── Bestätigungs-Modal (Archivieren) ───────────────────────────────── -->
+<div class="modal-overlay" id="confirmOverlay">
+  <div class="confirm-modal">
+    <h3 id="confirmTitle">Bestätigen</h3>
+    <p id="confirmMsg"></p>
+    <div class="confirm-btns">
+      <button class="btn-confirm-yes" id="confirmYes">Ja, weiter</button>
+      <button class="btn-confirm-no"  id="confirmNo">Abbrechen</button>
     </div>
   </div>
+</div>
 
-  <script>
-  
- 
-  let authHeader = null;   // Base64-kodiert, wird beim Login gesetzt
-  let isLoggedIn = false;
+<!-- ── Toast ──────────────────────────────────────────────────────────── -->
+<div id="toast"></div>
 
-  /*  LOGIN  */
-  async function attemptLogin() {
-    const user = document.getElementById("loginUser").value.trim();
-    const pass = document.getElementById("loginPass").value;
-    const err  = document.getElementById("loginError");
+<script>
+/* ════════════════════════════════════════════════════════════════════
+   Admin-Panel Script  –  Vercel-Version
+   Neue Features: Status-E-Mails · Abholbereit-Spalte · Archivierung
+════════════════════════════════════════════════════════════════════ */
 
-    if (!user || !pass) {
-      err.textContent = "Bitte Benutzername und Passwort eingeben.";
-      return;
+let authHeader  = null;
+let isLoggedIn  = false;
+let currentView = "active";   // "active" | "archive"
+let allOrders   = [];         // aktuell geladene Bestellungen
+
+/* ──────────  TOAST  ──────────────────────────────────────────────── */
+function showToast(msg, duration = 2500) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), duration);
+}
+
+/* ──────────  CONFIRM MODAL  ──────────────────────────────────────── */
+function confirm(title, msg) {
+  return new Promise(resolve => {
+    document.getElementById("confirmTitle").textContent = title;
+    document.getElementById("confirmMsg").textContent   = msg;
+    document.getElementById("confirmOverlay").classList.add("active");
+
+    function cleanup(val) {
+      document.getElementById("confirmOverlay").classList.remove("active");
+      document.getElementById("confirmYes").removeEventListener("click", onYes);
+      document.getElementById("confirmNo").removeEventListener("click",  onNo);
+      resolve(val);
     }
-
-    err.textContent = "Prüfe Zugangsdaten…";
-
-    // Anmeldedaten als Base64-Header vorbereiten (HTTP Basic Auth)
-    const encoded = btoa(`${user}:${pass}`);
-    const testHeader = `Basic ${encoded}`;
-
-    // Einen  Server-Request machen um die Credentials zu prüfen
-    const res = await fetch("/api/admin?action=orders", {
-      headers: { "Authorization": testHeader },
-    });
-
-    if (res.status === 401) {
-      err.textContent = "Falscher Benutzername oder falsches Passwort.";
-      document.getElementById("loginPass").value = "";
-      authHeader = null;
-      return;
-    }
-
-    if (!res.ok) {
-      err.textContent = "Serverfehler. Bitte versuche es später.";
-      return;
-    }
-
-    //  eingeloggt
-    authHeader = testHeader;
-    isLoggedIn = true;
-    err.textContent = "";
-
-    document.getElementById("loginScreen").style.display = "none";
-    document.getElementById("dashboard").style.display   = "block";
-    document.getElementById("logoutBtn").hidden = false;
-
-    const data = await res.json();
-    renderOrders(data);
-  }
-
-  document.getElementById("loginBtn").addEventListener("click", attemptLogin);
-  document.getElementById("loginPass").addEventListener("keydown", e => {
-    if (e.key === "Enter") attemptLogin();
+    const onYes = () => cleanup(true);
+    const onNo  = () => cleanup(false);
+    document.getElementById("confirmYes").addEventListener("click", onYes);
+    document.getElementById("confirmNo").addEventListener("click",  onNo);
   });
-  document.getElementById("loginUser").addEventListener("keydown", e => {
-    if (e.key === "Enter") document.getElementById("loginPass").focus();
+}
+
+/* ──────────  LOGIN  ──────────────────────────────────────────────── */
+async function attemptLogin() {
+  const user = document.getElementById("loginUser").value.trim();
+  const pass = document.getElementById("loginPass").value;
+  const err  = document.getElementById("loginError");
+
+  if (!user || !pass) { err.textContent = "Bitte Benutzername und Passwort eingeben."; return; }
+  err.textContent = "Prüfe Zugangsdaten…";
+
+  const encoded    = btoa(`${user}:${pass}`);
+  const testHeader = `Basic ${encoded}`;
+
+  const res = await fetch("/api/admin?action=orders&archived=false", {
+    headers: { "Authorization": testHeader },
   });
 
-  /* Logout  */
-  document.getElementById("logoutBtn").addEventListener("click", () => {
-    authHeader = null;
-    isLoggedIn = false;
-    document.getElementById("loginScreen").style.display = "";
-    document.getElementById("dashboard").style.display   = "none";
-    document.getElementById("logoutBtn").hidden = true;
-    document.getElementById("loginUser").value = "";
+  if (res.status === 401) {
+    err.textContent = "Falscher Benutzername oder falsches Passwort.";
     document.getElementById("loginPass").value = "";
-    document.getElementById("loginError").textContent = "";
+    authHeader = null; return;
+  }
+  if (!res.ok) { err.textContent = "Serverfehler. Bitte versuche es später."; return; }
+
+  authHeader = testHeader;
+  isLoggedIn = true;
+  err.textContent = "";
+  document.getElementById("loginScreen").style.display = "none";
+  document.getElementById("dashboard").style.display   = "block";
+  document.getElementById("logoutBtn").hidden = false;
+
+  allOrders = await res.json();
+  renderOrders(allOrders);
+}
+
+document.getElementById("loginBtn").addEventListener("click", attemptLogin);
+document.getElementById("loginPass").addEventListener("keydown", e => { if (e.key === "Enter") attemptLogin(); });
+document.getElementById("loginUser").addEventListener("keydown", e => { if (e.key === "Enter") document.getElementById("loginPass").focus(); });
+
+/* ── Logout ────────────────────────────────────────────────────────── */
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  authHeader = null; isLoggedIn = false; allOrders = [];
+  document.getElementById("loginScreen").style.display = "";
+  document.getElementById("dashboard").style.display   = "none";
+  document.getElementById("logoutBtn").hidden = true;
+  document.getElementById("loginUser").value  = "";
+  document.getElementById("loginPass").value  = "";
+  document.getElementById("loginError").textContent = "";
+});
+
+/* ──────────  TABS  ───────────────────────────────────────────────── */
+document.getElementById("tabActive").addEventListener("click", () => switchTab("active"));
+document.getElementById("tabArchive").addEventListener("click", () => switchTab("archive"));
+
+function switchTab(view) {
+  currentView = view;
+  document.getElementById("tabActive").classList.toggle("active",  view === "active");
+  document.getElementById("tabArchive").classList.toggle("active", view === "archive");
+  document.getElementById("dashTitle").textContent = view === "active" ? "Bestellungen" : "Archiv";
+
+  // Archiv-spezifische Bulk-Buttons zeigen/verstecken
+  document.getElementById("bulkArchiveBtn").style.display = view === "active"  ? "" : "none";
+  document.getElementById("bulkRestoreBtn").style.display = view === "archive" ? "" : "none";
+  document.getElementById("archiveDoneBtn").style.display = view === "active"  ? "" : "none";
+  document.getElementById("archiveEmptyBtn").style.display= view === "active"  ? "" : "none";
+
+  loadOrders();
+}
+
+/* ──────────  BESTELLUNGEN LADEN  ────────────────────────────────── */
+async function loadOrders() {
+  const colspan  = 10;
+  const tbody    = document.getElementById("ordersBody");
+  tbody.innerHTML = `<tr><td colspan="${colspan}" class="table-state">Lade…</td></tr>`;
+  clearSelection();
+
+  const archived = currentView === "archive";
+  const res = await fetch(`/api/admin?action=orders&archived=${archived}`, {
+    headers: { "Authorization": authHeader },
   });
 
-  /*  BESTELLUNGEN LADEN */
-  async function loadOrders() {
-    const tbody = document.getElementById("ordersBody");
-    tbody.innerHTML = `<tr><td colspan="7" class="table-state">Lade Bestellungen…</td></tr>`;
+  if (!res.ok) {
+    tbody.innerHTML = `<tr><td colspan="${colspan}" class="table-state" style="color:var(--red)">Fehler (${res.status})</td></tr>`;
+    return;
+  }
+  allOrders = await res.json();
+  renderOrders(allOrders);
+}
 
-    const res = await fetch("/api/admin?action=orders", {
-      headers: { "Authorization": authHeader },
+document.getElementById("refreshBtn").addEventListener("click", loadOrders);
+
+/* ──────────  TABELLE RENDERN  ───────────────────────────────────── */
+function renderOrders(data) {
+  const colspan = 10;
+  const tbody   = document.getElementById("ordersBody");
+  tbody.innerHTML = "";
+
+  if (!data || data.length === 0) {
+    const msg = currentView === "archive" ? "Archiv ist leer." : "Noch keine Bestellungen vorhanden.";
+    tbody.innerHTML = `<tr><td colspan="${colspan}" class="table-state">${msg}</td></tr>`;
+    document.getElementById("orderCount").textContent = "";
+    return;
+  }
+
+  document.getElementById("orderCount").textContent =
+    `${data.length} Bestellung${data.length !== 1 ? "en" : ""}`;
+
+  data.forEach(order => {
+    const tr = document.createElement("tr");
+    if (order.archived) tr.classList.add("archived-row");
+
+    const dateStr = order.created_at
+      ? new Date(order.created_at).toLocaleString("de-DE", {
+          day: "2-digit", month: "2-digit", year: "numeric",
+          hour: "2-digit", minute: "2-digit"
+        })
+      : "—";
+
+    const archiveBtn = currentView === "active"
+      ? `<button class="btn-sm arch-btn" data-id="${order.id}" title="Archivieren">🗄️</button>`
+      : `<button class="btn-sm rest-btn" data-id="${order.id}" title="Wiederherstellen">♻️</button>`;
+
+    tr.innerHTML = `
+      <td class="td-check"><input type="checkbox" class="row-checkbox select-row" data-id="${order.id}" /></td>
+      <td><button class="order-id-btn">${order.order_id || order.id.substring(0,8)+"…"}</button></td>
+      <td>${order.product_name || "—"}</td>
+      <td>${order.customer_name || "—"}</td>
+      <td>${statusBadge("paid",      order.id, order.paid)}</td>
+      <td>${statusBadge("ordered",   order.id, order.ordered)}</td>
+      <td>${statusBadge("ready",     order.id, order.ready)}</td>
+      <td>${statusBadge("delivered", order.id, order.delivered)}</td>
+      <td class="date-cell">${dateStr}</td>
+      <td>${archiveBtn}</td>
+    `;
+
+    tr.querySelector(".order-id-btn").addEventListener("click", () => openDetail(order));
+
+    tr.querySelectorAll(".status-badge").forEach(badge => {
+      badge.addEventListener("click", () => toggleStatus(badge, order));
     });
 
-    if (!res.ok) {
-      tbody.innerHTML = `<tr><td colspan="7" class="table-state" style="color:var(--red)">
-        Fehler beim Laden (${res.status})</td></tr>`;
-      return;
-    }
+    const archBtn = tr.querySelector(".arch-btn");
+    if (archBtn) archBtn.addEventListener("click", () => archiveSingle(order.id, true));
+    const restBtn = tr.querySelector(".rest-btn");
+    if (restBtn) restBtn.addEventListener("click", () => archiveSingle(order.id, false));
 
-    const data = await res.json();
-    renderOrders(data);
-  }
+    tr.querySelector(".select-row").addEventListener("change", updateBulkBar);
 
-  document.getElementById("refreshBtn").addEventListener("click", loadOrders);
-
-  /* TABELLE  */
-  function renderOrders(data) {
-    const tbody = document.getElementById("ordersBody");
-    tbody.innerHTML = "";
-
-    if (!data || data.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="7" class="table-state">Noch keine Bestellungen vorhanden.</td></tr>`;
-      document.getElementById("orderCount").textContent = "";
-      return;
-    }
-
-    document.getElementById("orderCount").textContent =
-      `${data.length} Bestellung${data.length !== 1 ? "en" : ""}`;
-
-    data.forEach(order => {
-      const tr = document.createElement("tr");
-      const dateStr = order.created_at
-        ? new Date(order.created_at).toLocaleString("de-DE", {
-            day: "2-digit", month: "2-digit", year: "numeric",
-            hour: "2-digit", minute: "2-digit"
-          })
-        : "—";
-
-      tr.innerHTML = `
-        <td>
-          <button class="order-id-btn" data-id="${order.id}">
-            ${order.order_id || order.id.substring(0, 8) + "…"}
-          </button>
-        </td>
-        <td>${order.product_name || "—"}</td>
-        <td>${order.customer_name || "—"}</td>
-        <td>${statusBadge("paid",      order.id, order.paid)}</td>
-        <td>${statusBadge("ordered",   order.id, order.ordered)}</td>
-        <td>${statusBadge("delivered", order.id, order.delivered)}</td>
-        <td class="date-cell">${dateStr}</td>
-      `;
-
-      tr.querySelector(".order-id-btn").addEventListener("click", () => openDetail(order));
-
-      tr.querySelectorAll(".status-badge").forEach(badge => {
-        badge.addEventListener("click", () => toggleStatus(badge, order));
-      });
-
-      tbody.appendChild(tr);
-    });
-  }
-
-  /* STATUS */
-  function statusBadge(field, orderId, value) {
-    const on = !!value;
-    return `<button class="status-badge ${on ? "on" : "off"}"
-               data-field="${field}" data-order-id="${orderId}">
-               <span class="status-dot"></span>
-               ${on ? "Ja" : "Nein"}
-            </button>`;
-  }
-
-  
-  async function toggleStatus(badge, order) {
-    const field    = badge.dataset.field;
-    const newValue = badge.classList.contains("on") ? false : true;
-
-    badge.classList.toggle("on",  newValue);
-    badge.classList.toggle("off", !newValue);
-    badge.innerHTML = `<span class="status-dot"></span>${newValue ? "Ja" : "Nein"}`;
-
-    // An Server senden
-    const res = await fetch("/api/admin?action=status", {
-      method: "PATCH",
-      headers: {
-        "Authorization": authHeader,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id: order.id, field, value: newValue }),
-    });
-
-    if (!res.ok) {
-      // Rollback
-      badge.classList.toggle("on",  !newValue);
-      badge.classList.toggle("off", newValue);
-      badge.innerHTML = `<span class="status-dot"></span>${!newValue ? "Ja" : "Nein"}`;
-      alert("Fehler beim Speichern: " + res.status);
-    }
-
-    order[field] = newValue;
-  }
-
-  /* DETAIL MODAL  */
-  function openDetail(order) {
-    document.getElementById("detailTitle").textContent =
-      `Bestellung ${order.order_id || "—"}`;
-
-    const grid = document.getElementById("detailGrid");
-    const rows = [
-      { label: "Bestell-ID",   value: order.order_id || "—" },
-      { label: "Datum",        value: order.created_at ? new Date(order.created_at).toLocaleString("de-DE") : "—" },
-      { label: "divider" },
-      { label: "Produkt",      value: order.product_name  || "—" },
-      { label: "Preis",        value: order.product_price || "—" },
-      { label: "Größe",        value: order.size          || "—" },
-      { label: "Farbe",        value: order.color         || "—" },
-      { label: "Geschlecht",   value: order.gender        || "—" },
-      { label: "Klasse",       value: `${order.class_level || ""}${order.class_letter || ""}` || "—" },
-      { label: "divider" },
-      { label: "Name",         value: order.customer_name  || "—" },
-      { label: "E-Mail",       value: order.customer_email || "—", full: true },
-      { label: "Anmerkung",    value: order.note           || "—", full: true },
-      { label: "divider" },
-      { label: "Bezahlt",      value: order.paid      ? "✓ Ja" : "✗ Nein" },
-      { label: "Bestellt",     value: order.ordered   ? "✓ Ja" : "✗ Nein" },
-      { label: "Ausgeliefert", value: order.delivered ? "✓ Ja" : "✗ Nein" },
-    ];
-
-    grid.innerHTML = rows.map(r => {
-      if (r.label === "divider") return `<hr class="detail-divider" />`;
-      return `
-        <div class="detail-item${r.full ? " full" : ""}">
-          <span class="detail-label">${r.label}</span>
-          <span class="detail-value">${r.value}</span>
-        </div>`;
-    }).join("");
-
-    document.getElementById("detailOverlay").classList.add("active");
-    document.body.style.overflow = "hidden";
-  }
-
-  function closeDetail() {
-    document.getElementById("detailOverlay").classList.remove("active");
-    document.body.style.overflow = "";
-  }
-
-  document.getElementById("detailClose").addEventListener("click", closeDetail);
-  document.getElementById("detailOverlay").addEventListener("click", e => {
-    if (e.target === e.currentTarget) closeDetail();
+    tbody.appendChild(tr);
   });
-  document.addEventListener("keydown", e => {
-    if (e.key === "Escape") closeDetail();
+
+  // Select-All
+  document.getElementById("selectAll").checked = false;
+}
+
+/* ──────────  STATUS BADGE  ──────────────────────────────────────── */
+function statusBadge(field, orderId, value) {
+  const on = !!value;
+  return `<button class="status-badge ${on ? "on" : "off"}"
+             data-field="${field}" data-order-id="${orderId}">
+             <span class="status-dot"></span>${on ? "Ja" : "Nein"}
+          </button>`;
+}
+
+/* ──────────  STATUS TOGGLE (+ E-Mail) ───────────────────────────── */
+async function toggleStatus(badge, order) {
+  const field    = badge.dataset.field;
+  const newValue = badge.classList.contains("on") ? false : true;
+
+  // Optimistisch UI updaten
+  badge.classList.add("loading");
+  badge.classList.toggle("on",  newValue);
+  badge.classList.toggle("off", !newValue);
+  badge.innerHTML = `<span class="status-dot"></span>${newValue ? "Ja" : "Nein"}`;
+
+  const res = await fetch("/api/admin?action=status", {
+    method: "PATCH",
+    headers: { "Authorization": authHeader, "Content-Type": "application/json" },
+    body: JSON.stringify({ id: order.id, field, value: newValue, order }),
   });
-  </script>
+
+  badge.classList.remove("loading");
+
+  if (!res.ok) {
+    // Rollback
+    badge.classList.toggle("on",  !newValue);
+    badge.classList.toggle("off", newValue);
+    badge.innerHTML = `<span class="status-dot"></span>${!newValue ? "Ja" : "Nein"}`;
+    showToast("❌ Fehler beim Speichern");
+    return;
+  }
+
+  order[field] = newValue;
+
+  const labels = { paid: "Bezahlt", ordered: "Bestellt", ready: "Abholbereit", delivered: "Ausgeliefert" };
+  showToast(`✓ ${labels[field] || field}: ${newValue ? "Ja" : "Nein"} – E-Mail gesendet`);
+}
+
+/* ──────────  ARCHIV – EINZELN  ──────────────────────────────────── */
+async function archiveSingle(id, archive) {
+  const action = archive ? "archivieren" : "wiederherstellen";
+  const ok = await confirm(
+    archive ? "Archivieren" : "Wiederherstellen",
+    `Möchtest du diese Bestellung wirklich ${action}?`
+  );
+  if (!ok) return;
+
+  const res = await fetch("/api/admin?action=archive", {
+    method: "PATCH",
+    headers: { "Authorization": authHeader, "Content-Type": "application/json" },
+    body: JSON.stringify({ id, archived: archive }),
+  });
+
+  if (!res.ok) { showToast("❌ Fehler beim Archivieren"); return; }
+  showToast(archive ? "🗄️ Archiviert" : "♻️ Wiederhergestellt");
+  loadOrders();
+}
+
+/* ──────────  ARCHIV – BULK (Alle erledigten / leere)  ──────────── */
+document.getElementById("archiveDoneBtn").addEventListener("click", async () => {
+  const toArchive = allOrders.filter(o =>
+    !o.archived && o.paid && o.ordered && o.ready && o.delivered
+  );
+  if (!toArchive.length) { showToast("Keine vollständig erledigten Bestellungen."); return; }
+  const ok = await confirm("Erledigte archivieren",
+    `${toArchive.length} Bestellung(en) mit allen Status-Häkchen werden archiviert.`);
+  if (!ok) return;
+  await bulkArchive(toArchive.map(o => o.id), true);
+});
+
+document.getElementById("archiveEmptyBtn").addEventListener("click", async () => {
+  const toArchive = allOrders.filter(o =>
+    !o.archived && !o.paid && !o.ordered && !o.ready && !o.delivered
+  );
+  if (!toArchive.length) { showToast("Keine Bestellungen ohne Status."); return; }
+  const ok = await confirm("Leere archivieren",
+    `${toArchive.length} Bestellung(en) ohne jeden Status werden archiviert.`);
+  if (!ok) return;
+  await bulkArchive(toArchive.map(o => o.id), true);
+});
+
+async function bulkArchive(ids, archived) {
+  const res = await fetch("/api/admin?action=archive-bulk", {
+    method: "PATCH",
+    headers: { "Authorization": authHeader, "Content-Type": "application/json" },
+    body: JSON.stringify({ ids, archived }),
+  });
+  if (!res.ok) { showToast("❌ Fehler beim Archivieren"); return; }
+  showToast(archived ? `🗄️ ${ids.length} archiviert` : `♻️ ${ids.length} wiederhergestellt`);
+  loadOrders();
+}
+
+/* ──────────  SELEKTION & BULK-BAR  ──────────────────────────────── */
+document.getElementById("selectAll").addEventListener("change", e => {
+  document.querySelectorAll(".select-row").forEach(cb => {
+    cb.checked = e.target.checked;
+    cb.closest("tr").classList.toggle("selected", e.target.checked);
+  });
+  updateBulkBar();
+});
+
+function updateBulkBar() {
+  const checked = [...document.querySelectorAll(".select-row:checked")];
+  const bar = document.getElementById("bulkBar");
+  document.getElementById("bulkCount").textContent = checked.length;
+
+  checked.forEach(cb => cb.closest("tr").classList.add("selected"));
+  document.querySelectorAll(".select-row:not(:checked)").forEach(cb =>
+    cb.closest("tr").classList.remove("selected")
+  );
+
+  bar.classList.toggle("visible", checked.length > 0);
+}
+
+function clearSelection() {
+  document.querySelectorAll(".select-row").forEach(cb => { cb.checked = false; });
+  document.getElementById("selectAll").checked = false;
+  document.getElementById("bulkBar").classList.remove("visible");
+}
+
+function getSelectedIds() {
+  return [...document.querySelectorAll(".select-row:checked")].map(cb => cb.dataset.id);
+}
+
+document.getElementById("bulkArchiveBtn").addEventListener("click", async () => {
+  const ids = getSelectedIds();
+  if (!ids.length) return;
+  const ok = await confirm("Archivieren", `${ids.length} ausgewählte Bestellung(en) archivieren?`);
+  if (!ok) return;
+  await bulkArchive(ids, true);
+});
+
+document.getElementById("bulkRestoreBtn").addEventListener("click", async () => {
+  const ids = getSelectedIds();
+  if (!ids.length) return;
+  const ok = await confirm("Wiederherstellen", `${ids.length} Bestellung(en) wiederherstellen?`);
+  if (!ok) return;
+  await bulkArchive(ids, false);
+});
+
+document.getElementById("bulkSelectNone").addEventListener("click", clearSelection);
+
+/* ──────────  DETAIL MODAL  ──────────────────────────────────────── */
+function openDetail(order) {
+  document.getElementById("detailTitle").textContent = `Bestellung ${order.order_id || "—"}`;
+  const grid = document.getElementById("detailGrid");
+  const rows = [
+    { label: "Bestell-ID",   value: order.order_id || "—" },
+    { label: "Datum",        value: order.created_at ? new Date(order.created_at).toLocaleString("de-DE") : "—" },
+    { label: "divider" },
+    { label: "Produkt",      value: order.product_name  || "—" },
+    { label: "Preis",        value: order.product_price || "—" },
+    { label: "Größe",        value: order.size          || "—" },
+    { label: "Farbe",        value: order.color         || "—" },
+    { label: "Geschlecht",   value: order.gender        || "—" },
+    { label: "Klasse",       value: `${order.class_level || ""}${order.class_letter || ""}` || "—" },
+    { label: "divider" },
+    { label: "Name",         value: order.customer_name  || "—" },
+    { label: "E-Mail",       value: order.customer_email || "—", full: true },
+    { label: "Anmerkung",    value: order.note           || "—", full: true },
+    { label: "divider" },
+    { label: "Bezahlt",      value: order.paid      ? "✓ Ja" : "✗ Nein" },
+    { label: "Bestellt",     value: order.ordered   ? "✓ Ja" : "✗ Nein" },
+    { label: "Abholbereit",  value: order.ready     ? "✓ Ja" : "✗ Nein" },
+    { label: "Ausgeliefert", value: order.delivered ? "✓ Ja" : "✗ Nein" },
+    { label: "Archiviert",   value: order.archived  ? "Ja"   : "Nein" },
+  ];
+  grid.innerHTML = rows.map(r => {
+    if (r.label === "divider") return `<hr class="detail-divider" />`;
+    return `<div class="detail-item${r.full ? " full" : ""}">
+      <span class="detail-label">${r.label}</span>
+      <span class="detail-value">${r.value}</span>
+    </div>`;
+  }).join("");
+  document.getElementById("detailOverlay").classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeDetail() {
+  document.getElementById("detailOverlay").classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+document.getElementById("detailClose").addEventListener("click", closeDetail);
+document.getElementById("detailOverlay").addEventListener("click", e => {
+  if (e.target === e.currentTarget) closeDetail();
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    closeDetail();
+    document.getElementById("confirmOverlay").classList.remove("active");
+  }
+});
+</script>
 </body>
 </html>
