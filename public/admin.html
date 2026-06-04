@@ -213,7 +213,13 @@
     }
     .modal-overlay.active .confirm-modal { transform: translateY(0) scale(1); }
     .confirm-modal h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--gold); margin-bottom: .8rem; }
-    .confirm-modal p  { font-size: .9rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.5; }
+    .confirm-modal p  { font-size: .9rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5; }
+    .confirm-email-note {
+      background: rgba(59,130,246,.12); color: #3b82f6;
+      border: 1px solid rgba(59,130,246,.25); border-radius: var(--radius);
+      padding: .6rem 1rem; font-size: .82rem !important;
+      font-weight: 600; margin-bottom: 1.2rem !important;
+    }
     .confirm-btns { display: flex; gap: .8rem; justify-content: center; }
     .btn-confirm-yes {
       padding: .6rem 1.4rem; background: var(--gold); color: #000; border: none;
@@ -318,11 +324,15 @@
   </div>
 </div>
 
-<!-- ── Bestätigungs-Modal (Archivieren) ───────────────────────────────── -->
+<!-- ── Bestätigungs-Modal ─────────────────────────────────────────────── -->
 <div class="modal-overlay" id="confirmOverlay">
   <div class="confirm-modal">
+    <div id="confirmIcon" style="font-size:2rem;margin-bottom:.5rem"></div>
     <h3 id="confirmTitle">Bestätigen</h3>
     <p id="confirmMsg"></p>
+    <p id="confirmEmailNote" class="confirm-email-note" hidden>
+      📧 Eine E-Mail wird automatisch an den Kunden gesendet.
+    </p>
     <div class="confirm-btns">
       <button class="btn-confirm-yes" id="confirmYes">Ja, weiter</button>
       <button class="btn-confirm-no"  id="confirmNo">Abbrechen</button>
@@ -353,10 +363,15 @@ function showToast(msg, duration = 2500) {
 }
 
 /* ──────────  CONFIRM MODAL  ──────────────────────────────────────── */
-function confirm(title, msg) {
+function showConfirm(title, msg, { icon = "", showEmailNote = false } = {}) {
   return new Promise(resolve => {
     document.getElementById("confirmTitle").textContent = title;
     document.getElementById("confirmMsg").textContent   = msg;
+    document.getElementById("confirmIcon").textContent  = icon;
+
+    const emailNote = document.getElementById("confirmEmailNote");
+    emailNote.hidden = !showEmailNote;
+
     document.getElementById("confirmOverlay").classList.add("active");
 
     function cleanup(val) {
@@ -535,16 +550,41 @@ function statusBadge(field, orderId, value) {
           </button>`;
 }
 
-/* ──────────  STATUS TOGGLE (+ E-Mail) ───────────────────────────── */
+/* ──────────  STATUS TOGGLE (+ Bestätigung + E-Mail) ─────────────── */
 async function toggleStatus(badge, order) {
   const field    = badge.dataset.field;
   const newValue = badge.classList.contains("on") ? false : true;
 
-  // Optimistisch UI updaten
+  const LABELS = {
+    paid:      "Bezahlt",
+    ordered:   "Bestellt",
+    ready:     "Abholbereit",
+    delivered: "Ausgeliefert",
+  };
+  const ICONS = {
+    paid:      newValue ? "💶" : "↩️",
+    ordered:   newValue ? "📦" : "↩️",
+    ready:     newValue ? "🟢" : "↩️",
+    delivered: newValue ? "✅" : "↩️",
+  };
+
+  const label    = LABELS[field] || field;
+  const icon     = ICONS[field]  || "❓";
+  const newLabel = newValue ? "Ja" : "Nein";
+
+  // ── Bestätigungs-Dialog anzeigen ──────────────────────────────────
+  const ok = await showConfirm(
+    `${label} ändern`,
+    `Status "${label}" für ${order.customer_name} auf "${newLabel}" setzen?`,
+    { icon, showEmailNote: true }
+  );
+  if (!ok) return;
+
+  // ── Optimistisch UI updaten ───────────────────────────────────────
   badge.classList.add("loading");
   badge.classList.toggle("on",  newValue);
   badge.classList.toggle("off", !newValue);
-  badge.innerHTML = `<span class="status-dot"></span>${newValue ? "Ja" : "Nein"}`;
+  badge.innerHTML = `<span class="status-dot"></span>${newLabel}`;
 
   const res = await fetch("/api/admin?action=status", {
     method: "PATCH",
@@ -564,15 +604,13 @@ async function toggleStatus(badge, order) {
   }
 
   order[field] = newValue;
-
-  const labels = { paid: "Bezahlt", ordered: "Bestellt", ready: "Abholbereit", delivered: "Ausgeliefert" };
-  showToast(`✓ ${labels[field] || field}: ${newValue ? "Ja" : "Nein"} – E-Mail gesendet`);
+  showToast(`✓ ${label}: ${newLabel} — E-Mail gesendet`);
 }
 
 /* ──────────  ARCHIV – EINZELN  ──────────────────────────────────── */
 async function archiveSingle(id, archive) {
   const action = archive ? "archivieren" : "wiederherstellen";
-  const ok = await confirm(
+  const ok = await showConfirm(
     archive ? "Archivieren" : "Wiederherstellen",
     `Möchtest du diese Bestellung wirklich ${action}?`
   );
@@ -595,7 +633,7 @@ document.getElementById("archiveDoneBtn").addEventListener("click", async () => 
     !o.archived && o.paid && o.ordered && o.ready && o.delivered
   );
   if (!toArchive.length) { showToast("Keine vollständig erledigten Bestellungen."); return; }
-  const ok = await confirm("Erledigte archivieren",
+  const ok = await showConfirm("Erledigte archivieren",
     `${toArchive.length} Bestellung(en) mit allen Status-Häkchen werden archiviert.`);
   if (!ok) return;
   await bulkArchive(toArchive.map(o => o.id), true);
@@ -606,7 +644,7 @@ document.getElementById("archiveEmptyBtn").addEventListener("click", async () =>
     !o.archived && !o.paid && !o.ordered && !o.ready && !o.delivered
   );
   if (!toArchive.length) { showToast("Keine Bestellungen ohne Status."); return; }
-  const ok = await confirm("Leere archivieren",
+  const ok = await showConfirm("Leere archivieren",
     `${toArchive.length} Bestellung(en) ohne jeden Status werden archiviert.`);
   if (!ok) return;
   await bulkArchive(toArchive.map(o => o.id), true);
@@ -658,7 +696,7 @@ function getSelectedIds() {
 document.getElementById("bulkArchiveBtn").addEventListener("click", async () => {
   const ids = getSelectedIds();
   if (!ids.length) return;
-  const ok = await confirm("Archivieren", `${ids.length} ausgewählte Bestellung(en) archivieren?`);
+  const ok = await showConfirm("Archivieren", `${ids.length} ausgewählte Bestellung(en) archivieren?`);
   if (!ok) return;
   await bulkArchive(ids, true);
 });
@@ -666,7 +704,7 @@ document.getElementById("bulkArchiveBtn").addEventListener("click", async () => 
 document.getElementById("bulkRestoreBtn").addEventListener("click", async () => {
   const ids = getSelectedIds();
   if (!ids.length) return;
-  const ok = await confirm("Wiederherstellen", `${ids.length} Bestellung(en) wiederherstellen?`);
+  const ok = await showConfirm("Wiederherstellen", `${ids.length} Bestellung(en) wiederherstellen?`);
   if (!ok) return;
   await bulkArchive(ids, false);
 });
