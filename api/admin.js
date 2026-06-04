@@ -128,8 +128,10 @@ export default async function handler(req, res) {
             product_name:  order.product_name,
             size:          order.size,
             color:         order.color,
+            gender:        order.gender,
             class_level:   order.class_level,
             class_letter:  order.class_letter,
+            note:          order.note || "—",
             status_label:  cfg.label,
           }
         );
